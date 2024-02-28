@@ -23,7 +23,7 @@ jobs:
       run: docker compose up -d db
 
     - name: Run tests
-      run: docker compose up test
+      run: docker compose run test
 
     - name: Clean up Docker Compose
       if: always()
