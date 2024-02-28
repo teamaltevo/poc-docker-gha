@@ -1,0 +1,24 @@
+{
+  "name": "poc-docker-gha",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "migrate": "prisma migrate dev",
+    "generate": "prisma generate",
+    "ci:test": "npm run migrate && jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@types/node": "^20.11.21",
+    "prisma": "^5.10.2",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.10.2"
+  }
+}

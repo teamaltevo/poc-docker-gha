@@ -1,0 +1,31 @@
+name: Docker Testing
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Build container for tests
+      run: docker compose build
+
+    - name: Start local database database
+      run: docker compose up -d db
+
+    - name: Run tests
+      run: docker compose up test
+
+    - name: Clean up Docker Compose
+      if: always()
+      run: docker compose down   
+    

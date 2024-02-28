@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  db:
+      image: mysql
+      environment:
+          MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+          MYSQL_DATABASE: ${MYSQL_DATABASE}
+  test: 
+      build: .
+      environment:
+          MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+          MYSQL_DATABASE: ${MYSQL_DATABASE}
+          MYSQL_USER: ${MYSQL_USER}
+          MYSQL_HOST: db
+      command: ["npm", "run", "ci:test"]
+      depends_on:
+          - db
