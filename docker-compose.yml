@@ -5,6 +5,11 @@ services:
       environment:
           MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
           MYSQL_DATABASE: ${MYSQL_DATABASE}
+      healthcheck:
+          test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+          interval: 2s
+          timeout: 10s
+          retries: 10
   test: 
       build: .
       environment:
@@ -12,6 +17,7 @@ services:
           MYSQL_DATABASE: ${MYSQL_DATABASE}
           MYSQL_USER: ${MYSQL_USER}
           MYSQL_HOST: db
-      command: ['./wait-for-it.sh', 'db:3306', '--', 'npm', 'run', 'ci:test']
+      command: ["npm", "run", "ci:test"]
       depends_on:
-          - db
+          db: 
+            condition: service_healthy
