@@ -12,6 +12,6 @@ services:
           MYSQL_DATABASE: ${MYSQL_DATABASE}
           MYSQL_USER: ${MYSQL_USER}
           MYSQL_HOST: db
-      command: ["npm", "run", "ci:test"]
+      command: ['./wait-for-it.sh', 'db:3306', '--', 'npm', 'run', 'ci:test']
       depends_on:
           - db
